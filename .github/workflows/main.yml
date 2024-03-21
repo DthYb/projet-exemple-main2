@@ -1,5 +1,8 @@
 name: Build when push
-on: push
+on:
+  push:
+    branches:
+      - main
 jobs:
   build-test-upload:
     name: Build & test
@@ -10,7 +13,7 @@ jobs:
       - name: install dependencies
         run: npm ci
       - name: Test
-        run: npm run test
+        run: npm test
       - name: Build
         run: npm run build
       - name: Upload
