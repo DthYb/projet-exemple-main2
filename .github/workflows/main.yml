@@ -27,4 +27,4 @@ jobs:
             name: dist-files
             path: dist
         - name: Show files
-            run: ls
+          run: ls
