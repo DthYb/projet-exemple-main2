@@ -3,24 +3,27 @@ on: push
 jobs:
   build-test-upload:
     name: Build & test
+    runs-on: ubuntu-latest
     steps:
       - name: Get code
         uses: actions/checkout@v4
       - name: Test
-        uses: npm run test
+        run: npm run test
       - name: Build
-        uses: npm run build
+        run: npm run build
       - name: Upload
         uses: actions/upload-artifact@v4
         with: 
           name: dist-files
-          path: /dist
-  recover:
-    steps:
-      - name: Get build artifac
-        uses: actions/download-artifact@v3
-        with:
-          name: dist-files
-          path: /dist
-      - name: Show files
-        run: ls
+          path: dist
+    recover:
+      needs: [build-test-upload]
+      runs-on: ubuntu-latest
+      steps:
+        - name: Get build artifac
+         uses: actions/download-artifact@v3
+          with:
+            name: dist-files
+            path: dist
+        - name: Show files
+            run: ls
