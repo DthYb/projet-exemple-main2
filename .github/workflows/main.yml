@@ -16,7 +16,7 @@ jobs:
         with: 
           name: dist-files
           path: dist
-    recover:
+  recover:
       needs: [build-test-upload]
       name: Recover artifact
       runs-on: ubuntu-latest
