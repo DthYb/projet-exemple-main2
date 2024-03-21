@@ -1,1 +1,22 @@
-
+name: Build when push
+on: push
+jobs:
+  build-test-upload:
+    name: Build & test
+    steps:
+      - name: Get code
+        uses: actions/checkout@v4
+      - name: Test
+        uses: npm run test
+      - name: Build
+        uses: npm run build
+      - name: Upload
+        uses: actions/upload-artifact@v4
+        with: 
+          name: dist-files
+  recover:
+    steps:
+      - name: Get build artifac
+        uses: actions/download-artifact@v3
+      - name: Show files
+        run: ls
